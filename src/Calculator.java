@@ -11,7 +11,7 @@ public class Calculator {
         var scanner = new Scanner(System.in);
         var input = scanner.nextLine();
         var patternArabic = Pattern.compile("([0-9]|10)\\s\\+?-?\\*?/?\\s([0-9]|10)");
-        var patternRoman = Pattern.compile("(I|II|III|IV|V|VI|VIII|IX|X)\\s\\+?-?\\*?/?\\s(I|II|III|IV|V|VI|VIII|IX|X)");
+        var patternRoman = Pattern.compile("(I|II|III|IV|V|VI|VII|VIII|IX|X)\\s\\+?-?\\*?/?\\s(I|II|III|IV|V|VI|VII|VIII|IX|X)");
         if(patternArabic.matcher(input).matches()){
             System.out.println("output:");
             System.out.println(calc(input));
@@ -77,8 +77,12 @@ public class Calculator {
             return result;
         }
         public static String arabicToRoman(int number) {
-            if ((number <= 0) || (number > 4000)) {
+            if (number < 0) {
                 throw new IllegalArgumentException();
+            }
+
+            if (number == 0) {
+                return "0";
             }
 
             var romanNumerals = RomanNumeral.getReverseSortedValues();
